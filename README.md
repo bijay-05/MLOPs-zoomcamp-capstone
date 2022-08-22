@@ -11,6 +11,17 @@ Dependent Variable (target) = fare_amount
 
 ## Experiment Tracking
 DagsHub provides with tracking server for each repo created. Tracking the experiments with DagsHub was not that difficult as expected, which others can also visualize from a single glance at the notebook cell. Recently, it is announced that now model registry is also available with DagsHub. To view the experiment logs, visit the project repo at [DagsHub](https://dagshub.com/maiden90/mlops-zoomcamp-project)
+```
+import mlflow
+import os
+from getpass import getpass
+
+os.environ['MLFLOW_TRACKING_USERNAME'] = input('Enter your DAGsHub username: ')
+os.environ['MLFLOW_TRACKING_PASSWORD'] = getpass('Enter your DAGsHub access token: ')
+os.environ['MLFLOW_TRACKING_PROJECTNAME'] = input('Enter your DAGsHub project name: ')
+
+mlflow.set_tracking_uri(f'https://dagshub.com/' + os.environ['MLFLOW_TRACKING_USERNAME'] + '/' + os.environ['MLFLOW_TRACKING_PROJECTNAME'] + '.mlflow')
+```
 
 ## Workflow Orchestration
 Since this project was not developed on cloud, there is just a basic workflow defining tasks and flow in `model_training_pipeline.py`. This gives observability around the functions in the pipeline. 
